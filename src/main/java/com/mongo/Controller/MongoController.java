@@ -7,15 +7,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mongo.Entity.Employee;
+import com.mongo.DAO.EmployeeDAO;
 import com.mongo.Repository.EmployeeRepository;
+import com.mongo.Service.EmployeeService;
 
 @RestController
 public class MongoController {
 
 
     @Autowired
-    private EmployeeRepository empRepo;
+    private EmployeeService employeeService;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
     
     @GetMapping("/")
     public String show(){
@@ -23,13 +27,12 @@ public class MongoController {
     }
 
     @PostMapping("/add")
-    public String addEmp(@RequestBody Employee emp){
-        empRepo.save(emp);
-        return "Saved";
+    public String addEmp(@RequestBody EmployeeDAO employeeDAO){
+        return employeeService.addUser(employeeDAO);
     }
 
     @GetMapping("/show")
     public ResponseEntity<?> show1(){
-        return ResponseEntity.ok(this.empRepo.findAll());
+        return ResponseEntity.ok(this.employeeRepository.findAll());
     }
 }
