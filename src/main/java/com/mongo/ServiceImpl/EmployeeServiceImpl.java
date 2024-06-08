@@ -1,6 +1,7 @@
 package com.mongo.ServiceImpl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,26 +28,53 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public String updateEmployee(EmployeeDAO employeeDAO, int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateEmployee'");
+        Employee employee = employeeRepository.findById(id).get();
+        employee.setId(employeeDAO.getId());
+        employee.setName(employeeDAO.getName());
+        employee.setDepartment(employeeDAO.getDepartment());
+        employeeRepository.save(employee);
+
+        return "Employee data updated.";
     }
 
     @Override
     public EmployeeDAO getEmployeeById(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getEmployeeById'");
+        Employee emp = employeeRepository.findById(id).get();
+        EmployeeDAO employeeDAO = entityToDao(emp);
+
+        return employeeDAO;
     }
 
     @Override
     public List<EmployeeDAO> getAllEmployee() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllEmployee'");
+        List<Employee> emp = employeeRepository.findAll();
+        List<EmployeeDAO> employeeDAO = emp.stream().map(a -> entityToDao(a)).collect(Collectors.toList());
+
+        return employeeDAO;
     }
 
     @Override
     public String deleteEmployee(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteEmployee'");
+        employeeRepository.deleteById(id);
+        return "EMployee deleted.";
     }
+
+    private EmployeeDAO entityToDao(Employee employee){
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+        employeeDAO.setId(employee.getId());
+        employeeDAO.setName(employee.getName());
+        employeeDAO.setDepartment(employee.getDepartment());
+
+        return employeeDAO;
+    }
+
+    // private Employee daoToEntity( EmployeeDAO employeeDAO){
+    //     Employee employee = new Employee();
+    //     employee.setId(employeeDAO.getId());
+    //     employee.setName(employeeDAO.getName());
+    //     employee.setDepartment(employeeDAO.getDepartment());
+
+    //     return employee;
+    // }
     
 }
