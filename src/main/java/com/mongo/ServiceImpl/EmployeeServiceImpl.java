@@ -1,5 +1,7 @@
 package com.mongo.ServiceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,18 @@ public class EmployeeServiceImpl implements EmployeeService{
     public EmployeeDAO getEmployeeById(int id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getEmployeeById'");
+    }
+
+    @Override
+    public List<EmployeeDAO> getAllEmployee() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAllEmployee'");
+    }
+
+    @Override
+    public String deleteEmployee(int id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteEmployee'");
     }
     
 }
