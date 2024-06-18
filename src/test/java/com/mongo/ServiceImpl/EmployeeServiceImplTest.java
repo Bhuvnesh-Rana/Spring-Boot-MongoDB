@@ -6,6 +6,10 @@ import static org.mockito.Mockito.when;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
+import java.util.ArrayList;
+import java.util.Collections;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -71,7 +75,11 @@ public class EmployeeServiceImplTest {
 
     @Test
     void testGetAllEmployee() {
+        mock(EmployeeDAO.class);
+        mock(EmployeeRepository.class);
 
+        when(employeeRepository.findAll()).thenReturn(new ArrayList<Employee>(Collections.singleton(employee)));
+        assertThat(employeeService.getAllEmployee().get(0).getName()).isEqualTo(employee.getName());
     }
 
     @Test
