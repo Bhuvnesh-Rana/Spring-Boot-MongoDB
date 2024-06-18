@@ -1,5 +1,6 @@
 package com.mongo.ServiceImpl;
 
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -8,7 +9,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Answers;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.mongo.DAO.EmployeeDAO;
@@ -59,7 +62,11 @@ public class EmployeeServiceImplTest {
 
     @Test
     void testDeleteEmployee() {
+        mock(EmployeeDAO.class);
+        mock(EmployeeRepository.class, Mockito.CALLS_REAL_METHODS);
 
+        doAnswer(Answers.CALLS_REAL_METHODS).when(employeeRepository).deleteById(1);
+        assertThat(employeeService.deleteEmployee(1)).isEqualTo("Employee deleted.");
     }
 
     @Test

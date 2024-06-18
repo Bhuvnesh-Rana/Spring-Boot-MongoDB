@@ -60,7 +60,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public String deleteEmployee(int id) {
         employeeRepository.deleteById(id);
-        return "EMployee deleted.";
+        return "Employee deleted.";
     }
 
     private EmployeeDAO entityToDao(Employee employee){
