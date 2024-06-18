@@ -94,6 +94,12 @@ public class EmployeeServiceImplTest {
 
     @Test
     void testUpdateEmployee() {
+        mock(EmployeeDAO.class);
+        mock(EmployeeRepository.class);
 
+        when(employeeRepository.findById(1)).thenReturn(Optional.ofNullable(employee));
+        when(employeeRepository.save(employee)).thenReturn(employee);
+        EmployeeDAO employeeDAO = entityToDao(employee);
+        assertThat(employeeService.updateEmployee(employeeDAO, 1)).isEqualTo("Employee data updated.");
     }
 }
