@@ -9,6 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -84,7 +85,11 @@ public class EmployeeServiceImplTest {
 
     @Test
     void testGetEmployeeById() {
+        mock(EmployeeDAO.class);
+        mock(EmployeeRepository.class);
 
+        when(employeeRepository.findById(1)).thenReturn(Optional.ofNullable(employee));
+        assertThat(employeeService.getEmployeeById(1).getName()).isEqualTo(employee.getName());
     }
 
     @Test
