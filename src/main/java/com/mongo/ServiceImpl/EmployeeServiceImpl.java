@@ -18,6 +18,10 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository2) {
+        this.employeeRepository = employeeRepository2;
+    }
+
     @Override
     public String addUser(EmployeeDAO dao) {
         Employee emp = new Employee();
