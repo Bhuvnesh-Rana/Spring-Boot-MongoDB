@@ -8,6 +8,8 @@
 7. db.collectionName.find()  OR db.collectionName.find()
 8. db.collectionName.updateOne({ name: "Alice" }, { $set: { age: 26 } })  OR  db.collectionName.updateMany({ age: { $lt: 30 } }, { $inc: { age: 1 } })
 9. db.collectionName.deleteOne({ name: "Charlie" })  OR  db.collectionName.deleteOne({ name: "Charlie" })
+10. db.collectionName.drop()
+
 
 
 
